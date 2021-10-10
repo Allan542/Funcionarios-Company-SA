@@ -18,12 +18,14 @@ import javax.swing.JTextField;
 import sistema.BancoDeDados;
 import sistema.entidades.Cargo;
 
-public class CargosInserir extends JPanel {
+public class CargosEditar extends JPanel {
+    Cargo cargoAtual;
     JLabel labelTitulo, labelCargo;
     JTextField campoCargo;
     JButton botaoGravar;
     
-    public CargosInserir(){
+    public CargosEditar(Cargo cargo){
+        cargoAtual = cargo;
         criarComponentes();
         criarEventos();
     }
@@ -31,11 +33,12 @@ public class CargosInserir extends JPanel {
     private void criarComponentes() {
         setLayout(null);
         
-        labelTitulo = new JLabel("Cadastro de Cargo", JLabel.CENTER);
+        labelTitulo = new JLabel("Editor de Cargo", JLabel.CENTER);
         labelTitulo.setFont(new Font(labelTitulo.getFont().getName(), Font.PLAIN, 20));
         labelCargo = new JLabel("Nome do cargo", JLabel.LEFT);
-        campoCargo = new JTextField();
-        botaoGravar = new JButton("Adicionar Cargo");
+        campoCargo = new JTextField(cargoAtual.getNome());
+        botaoGravar = new JButton("Salvar");
+        
         
         labelTitulo.setBounds(20, 20, 660, 40);
         labelCargo.setBounds(150, 120, 400, 20);
@@ -53,16 +56,16 @@ public class CargosInserir extends JPanel {
     private void criarEventos() {
         botaoGravar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed (ActionEvent e) {
-                Cargo novoCargo = new Cargo();
-                novoCargo.setNome(campoCargo.getText());
+            public void actionPerformed(ActionEvent e) {
+                cargoAtual.setNome(campoCargo.getText());
                 
-                sqlInserirCargo(novoCargo);
+                sqlAtualizarCargo();
+                
             }
         });
     }
     
-    private void sqlInserirCargo(Cargo novoCargo) {
+    private void sqlAtualizarCargo(){
         
         // validando nome
         if(campoCargo.getText().length() <= 3){
@@ -70,7 +73,6 @@ public class CargosInserir extends JPanel {
             return;
         }
         
-        // conexão
         Connection conexao;
         // instrucao SQL
         Statement instrucaoSQL;
@@ -83,11 +85,14 @@ public class CargosInserir extends JPanel {
             
             // criando a instrução SQL
             instrucaoSQL = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            instrucaoSQL.executeUpdate("INSERT INTO cargos (nome) VALUES ('"+novoCargo.getNome()+"')");
+            instrucaoSQL.executeUpdate("UPDATE cargos set nome='"+campoCargo.getText()+"' WHERE id="+cargoAtual.getId()+"");
             
-            JOptionPane.showMessageDialog(null, "Cargo adicionado com sucesso");
+            JOptionPane.showMessageDialog(null, "Cargo atualizado com sucesso");
+            
+            conexao.close();
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar o Cargo.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao atualizar o Cargo.");
             Logger.getLogger(CargosInserir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

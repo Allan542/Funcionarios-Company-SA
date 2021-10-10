@@ -2,6 +2,7 @@ package sistema.telas;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import sistema.Navegador;
 
 public class Inicio extends JPanel {
     
@@ -10,6 +11,7 @@ public class Inicio extends JPanel {
     public Inicio(){
         criarComponentes();
         criarEventos();
+        Navegador.habilitaMenu();
     }
 
     private void criarComponentes() {

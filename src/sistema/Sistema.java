@@ -2,7 +2,6 @@ package sistema;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import sistema.telas.Inicio;
 
 public class Sistema {
 
@@ -19,11 +18,7 @@ public class Sistema {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         
-        tela = new Inicio();
-        tela.setVisible(true);
-        frame.add(tela);
-        
-        frame.setVisible(true);
+        Navegador.login();
     }
     
 }

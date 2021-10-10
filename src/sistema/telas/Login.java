@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import sistema.Navegador;
 
 public class Login extends JPanel{
     JLabel labelUsuario;
@@ -55,6 +56,12 @@ public class Login extends JPanel{
         botaoEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // validando as credenciais
+                if(campoUsuario.getText().equals("admin") && new String(campoSenha.getPassword()).equals("admin")){
+                    Navegador.inicio();
+                } else{
+                    JOptionPane.showMessageDialog(null, "Acesso não permitido");
+                }
             }
         });
     }
