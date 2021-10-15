@@ -15,6 +15,8 @@ import sistema.telas.FuncionariosEditar;
 import sistema.telas.FuncionariosInserir;
 import sistema.telas.Inicio;
 import sistema.telas.Login;
+import sistema.telas.RelatoriosCargos;
+import sistema.telas.RelatoriosSalarios;
 
 public class Navegador {
     
@@ -71,6 +73,18 @@ public class Navegador {
     public static void funcionariosEditar(Funcionario funcionario){
         Sistema.tela = new FuncionariosEditar(funcionario);
         Sistema.frame.setTitle("Funcionários Company SA - Editar funcionários");
+        Navegador.atualizarTela();
+    }
+    
+    public static void relatoriosCargos(){
+        Sistema.tela = new RelatoriosCargos();
+        Sistema.frame.setTitle("Funcionários Company SA - Relatórios");
+        Navegador.atualizarTela();
+    }
+    
+    public static void relatoriosSalarios(){
+        Sistema.tela = new RelatoriosSalarios();
+        Sistema.frame.setTitle("Funcionários Company SA - Relatórios");
         Navegador.atualizarTela();
     }
 
@@ -178,11 +192,13 @@ public class Navegador {
         miRelatoriosCargos.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                relatoriosCargos();
             }
         });
         miRelatoriosSalarios.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                relatoriosSalarios();
             }
         });
     }
