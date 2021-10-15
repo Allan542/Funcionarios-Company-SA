@@ -159,6 +159,7 @@ public class CargosConsultar extends JPanel {
                 instrucaoSQL.executeUpdate("DELETE cargos WHERE id="+cargoAtual.getId()+"");
 
                 JOptionPane.showMessageDialog(null, "Cargo deletado com sucesso");
+                Navegador.inicio();
                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o Cargo.");

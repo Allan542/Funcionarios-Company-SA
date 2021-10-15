@@ -74,8 +74,7 @@ public class CargosInserir extends JPanel {
         Connection conexao;
         // instrucao SQL
         Statement instrucaoSQL;
-        // resultados
-        ResultSet resultados;
+
         
         try{
             // conectando ao banco de dados

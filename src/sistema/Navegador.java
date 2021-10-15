@@ -6,9 +6,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import sistema.entidades.Cargo;
+import sistema.entidades.Funcionario;
 import sistema.telas.CargosConsultar;
 import sistema.telas.CargosEditar;
 import sistema.telas.CargosInserir;
+import sistema.telas.FuncionariosConsultar;
+import sistema.telas.FuncionariosEditar;
+import sistema.telas.FuncionariosInserir;
 import sistema.telas.Inicio;
 import sistema.telas.Login;
 
@@ -36,19 +40,37 @@ public class Navegador {
     
     public static void cargosCadastrar(){
         Sistema.tela = new CargosInserir();
-        Sistema.frame.setTitle("Funcionários Company SA");
+        Sistema.frame.setTitle("Funcionários Company SA - Cadastrar cargos");
         Navegador.atualizarTela();
     }
     
     public static void cargosConsultar(){
         Sistema.tela = new CargosConsultar();
-        Sistema.frame.setTitle("Funcionários Company SA");
+        Sistema.frame.setTitle("Funcionários Company SA - Consultar cargos");
         Navegador.atualizarTela();
     }
     
     public static void cargosEditar(Cargo cargo){
         Sistema.tela = new CargosEditar(cargo);
-        Sistema.frame.setTitle("Funcionários Company SA");
+        Sistema.frame.setTitle("Funcionários Company SA - Editar cargos");
+        Navegador.atualizarTela();
+    }
+    
+    public static void funcionariosCadastrar(){
+        Sistema.tela = new FuncionariosInserir();
+        Sistema.frame.setTitle("Funcionários Company SA - Cadastrar funcionários");
+        Navegador.atualizarTela();
+    }
+    
+    public static void funcionariosConsultar(){
+        Sistema.tela = new FuncionariosConsultar();
+        Sistema.frame.setTitle("Funcionários Company SA - Consultar funcionários");
+        Navegador.atualizarTela();
+    }
+    
+    public static void funcionariosEditar(Funcionario funcionario){
+        Sistema.tela = new FuncionariosEditar(funcionario);
+        Sistema.frame.setTitle("Funcionários Company SA - Editar funcionários");
         Navegador.atualizarTela();
     }
 
@@ -128,11 +150,13 @@ public class Navegador {
         miFuncionariosCadastrar.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                funcionariosCadastrar();
             }
         });
         miFuncionariosConsultar.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                funcionariosConsultar();
             }
         });
         
